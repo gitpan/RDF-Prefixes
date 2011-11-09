@@ -9,6 +9,16 @@ SYNOPSIS
                             # @prefix dc2: <http://example.net/rdf/dc#> .
 
 DESCRIPTION
+    This module is not so much for managing namespaces/prefixes in code (see
+    RDF::Trine::NamespaceMap for that), but as a helper for code that
+    serialises data using namespaces.
+
+    It generates pretty prefixes, reducing "http://purl.org/dc/terms/" to
+    "dc" rather than something anonymous like like "ns01", and provides a
+    context for keeping track of namespaces already used, so that when
+    "http://purl.org/dc/elements/1.1/" is encountered, it won't stomp on the
+    previous definition of "dc".
+
   Constructor
     "new(\%suggestions, \%options)"
         Creates a new RDF prefix context.
@@ -16,7 +26,7 @@ DESCRIPTION
         Suggestions for prefix mappings may be given, but there's no
         guarantee that they'll be used.
 
-        The only option right now is 'syntax' that is used by the toString
+        The only option right now is 'syntax' that is used by the to_string
         method.
 
         Both hashrefs are optional.
@@ -53,6 +63,10 @@ DESCRIPTION
             printf("%s => %s\n", $prefix, $context->{$prefix});
           }
 
+    "TO_JSON"
+        A synonym for to_hashref, provided for the benefit of the JSON
+        package.
+
     "rdfa"
         Return the same data as "to_hashref", but as a string suitable for
         placing in an RDFa 1.1 prefix attribute.
@@ -72,8 +86,8 @@ DESCRIPTION
     "to_string"
         Calls either "rdfa", "sparql", "turtle" (the default) or "xmlns",
         based on the 'syntax' option passed to the constructor. This module
-        overloads the stringification operator, so calling toString is not
-        usually needed.
+        overloads the stringification operator, so explicitly calling
+        to_string is rarely necessary.
 
          my $context  = RDF::Prefixes->new({}, {syntax=>'turtle'});
          my $dc_title = 'http://purl.org/dc/terms/title';
@@ -86,8 +100,13 @@ AUTHOR
     Toby Inkster <tobyink@cpan.org>.
 
 COPYRIGHT
-    Copyright 2010 Toby Inkster
+    Copyright 2010-2011 Toby Inkster
 
     This library is free software; you can redistribute it and/or modify it
     under the same terms as Perl itself.
+
+DISCLAIMER OF WARRANTIES
+    THIS PACKAGE IS PROVIDED "AS IS" AND WITHOUT ANY EXPRESS OR IMPLIED
+    WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTIES OF
+    MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
 

@@ -8,30 +8,33 @@ build_requires:
 configure_requires:
   ExtUtils::MakeMaker: 6.42
 distribution_type: module
-generated_by: 'Module::Install version 0.91'
+generated_by: 'Module::Install version 1.02'
 keywords:
+  - Namespace
+  - Namespaces
+  - Prefix
+  - Prefixes
   - RDF
-  - prefixes
-  - prefix
-  - namespace
-  - namespaces
   - xmlns
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
   version: 1.4
+module_name: RDF::Prefixes
 name: RDF-Prefixes
 no_index:
   directory:
+    - examples
     - inc
     - t
+    - xt
 requires:
-  Carp: 1.00
+  Carp: 0
   common::sense: 0
-  perl: 5.8.0
+  perl: 5.10.0
 resources:
   bugtracker: http://rt.cpan.org/Dist/Display.html?Queue=RDF-Prefixes
-  homepage: http://search.cpan.org/dist/RDF-Prefixes/
+  homepage: https://metacpan.org/release/RDF-Prefixes
   license: http://dev.perl.org/licenses/
-  repository: http://goddamn.co.uk/viewvc/perlmods/RDF-Prefixes/
-version: 0.001
+  repository: http://goddamn.co.uk/svn-web/perlmods/browse/RDF-Prefixes/
+version: 0.002
