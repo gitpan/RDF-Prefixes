@@ -14,7 +14,7 @@ DESCRIPTION
     serialises data using namespaces.
 
     It generates pretty prefixes, reducing "http://purl.org/dc/terms/" to
-    "dc" rather than something anonymous like like "ns01", and provides a
+    "dc" rather than something too generic like like "ns01", and provides a
     context for keeping track of namespaces already used, so that when
     "http://purl.org/dc/elements/1.1/" is encountered, it won't stomp on the
     previous definition of "dc".
@@ -38,7 +38,7 @@ DESCRIPTION
 
     "get_qname($uri)"
         Gets a QName for a URI. e.g.
-        "get_prefix('http://purl.org/dc/terms/title')" might return
+        "get_qname('http://purl.org/dc/terms/title')" might return
         'dc:title'.
 
         Some URIs cannot be converted to QNames. In these cases, undef is
@@ -93,6 +93,13 @@ DESCRIPTION
          my $dc_title = 'http://purl.org/dc/terms/title';
          print "# Prefixes\n" . $context;
 
+  Internationalisation
+    Strings passed to and from this module are expected to be utf8 character
+    strings, not byte strings. This is not explicitly checked for, but will
+    be checked in a future version, so be warned!
+
+    URIs containing non-Latin characters should "just work".
+
 BUGS
     Please report any bugs to <http://rt.cpan.org/>.
 
@@ -100,7 +107,7 @@ AUTHOR
     Toby Inkster <tobyink@cpan.org>.
 
 COPYRIGHT
-    Copyright 2010-2011 Toby Inkster
+    Copyright 2010-2012 Toby Inkster
 
     This library is free software; you can redistribute it and/or modify it
     under the same terms as Perl itself.
