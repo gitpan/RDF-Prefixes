@@ -19,7 +19,7 @@ BEGIN {
 
 BEGIN {
 	$RDF::Prefixes::AUTHORITY = 'cpan:TOBYINK';
-	$RDF::Prefixes::VERSION   = '0.003';
+	$RDF::Prefixes::VERSION   = '0.004';
 }
 
 # These are the rules from Turtle (W3C WD, dated 09 Aug 2011).
@@ -265,7 +265,7 @@ sub _split_qname
 }
 
 my $looks_like_version = qr< ^ [0-9\.-]+ $ >x;
-my $too_generic        = [qw< terms ns vocab vocabulary rdf rdfs owl schema xsd >];
+my $too_generic        = qr< ^(?: terms|ns|vocab|vocabulary|rdf|rdfs|owl|schema|xsd )$ >x;
 
 sub _perfect_prefix
 {
@@ -286,8 +286,8 @@ sub _perfect_prefix
 	{
 		next WORD if (
 			   length $w < 1
-			or $w ~~ $looks_like_version
-			or $w ~~ $too_generic
+			or $w =~ $looks_like_version
+			or $w =~ $too_generic
 			or $w !~ m< ^ $PN_PREFIX $ >x
 		);
 		
@@ -470,7 +470,7 @@ Toby Inkster E<lt>tobyink@cpan.orgE<gt>.
 
 =head1 COPYRIGHT
 
-Copyright 2010-2012 Toby Inkster
+Copyright 2010-2013 Toby Inkster
 
 This library is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.
